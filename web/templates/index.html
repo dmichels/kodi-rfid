@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="static/css/skeleton.css">
+    </head>
+    <body>
+
+    <div class="container">
+        <h1>Kodi RFID Player</h1>
+        <form action="add" method="POST">
+            <h4>Add new RFID-Card</h4>
+            <div class="row">
+                <div class="three columns">
+                    <label for="rfidCode">RFID Code</label>
+                    <input class="u-full-width" type="text" id="rfidCode" name="id">
+                </div>
+                
+                <div class="three columns">
+                    <label for="description">Description</label>
+                    <input class="u-full-width" type="text" id="description" name="description">
+                </div>
+
+                <div class="three columns">
+                        <label for="player">Player</label>
+                        <select class="u-full-width" id="player" name="player">
+                          <option value="youtube">YouTube</option>
+                          <option value="netflix">Netflix</option>
+                          <option value="prime">Amazon Prime</option>
+                        </select>
+                </div>
+
+                <div class="three columns">
+                    <label for="contentId">Content ID</label>
+                    <input class="u-full-width" type="text" id="contentId" name="c_id">
+                </div>
+            </div>
+  
+            <div class="row">
+                    <input class="button-primary" type="submit" value="Create">
+            </div>    
+            
+                
+        </form>
+        <hr/>
+        <h4>Known Cards</h4>
+        <table class="u-full-width">
+            <thead>
+                <th>RFID-Code</th>
+                <th>Description</th>
+                <th>Player</th>
+                <th>Content ID</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <td>
+                        <a href='edit/{{movie.id}}'> {{movie.id}} </a>
+                    </td>
+                    <td>{{movie.description}}</td>
+                    <td>{{movie.player}}</td>
+                    <td>{{movie.c_id}}</td>
+                    <td>
+                        <form action='movies/{{movie.id}}/delete' method='POST'>
+                            <input  class="button-primary" type="submit" value="delete"/>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </body>
+</html>
